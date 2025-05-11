@@ -8,8 +8,27 @@
 import SwiftUI
 
 struct AddHabitView: View {
+    @State private var name = ""
+    var done: (String) -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            Form {
+                TextField("Habit title:", text: $name)
+            }
+            .navigationTitle("Add New Habit")
+            .toolbar {
+                ToolbarItem(placement: confirmationAction) {
+                    Button("Save") {
+                        done(name.trimmingCharacters(in: whitespacesAndNewlines))
+                    }
+                    .disabkle(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }
+                ToolbarItem(placement: cancellationAction) {
+                    Button("Cancel") { done("")}
+                }
+            }
+        }
     }
 }
 

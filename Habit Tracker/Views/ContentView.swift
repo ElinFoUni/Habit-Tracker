@@ -15,21 +15,33 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(
-                    }
-                    }
-                    }
-                    .navigationTitle("Habits")
-                    .toolbar {
-                        ToolbarItem(placement: .primaryAction) {
-                            Button(systemName "plus") {
-                                showingAdd = true
-                            }
-                        }
+                ForEach(vm.habits) { habit in
+                    HabitView(habit: habit) {
+                        vm.toggleDone(for: habit)
                     }
                     
-                    }
-                    
-                    #Preview {
-                        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-                    }
+                }
+            }
+        }
+        
+        .navigationTitle("Habits")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(systemName: "plus") {
+                    showingAdd = true
+                }
+            }
+            .sheet(isPresented: $showingAdd){
+                AddHabitView { name in
+                    vm.addHabit(named: name)
+                    showingAdd = false
+                }
+            }
+        }
+        
+    }
+    
+    #Preview {
+        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+}
