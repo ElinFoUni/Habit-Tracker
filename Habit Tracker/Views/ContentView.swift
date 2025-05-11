@@ -20,17 +20,24 @@ struct ContentView: View {
         .navigationTitle("Habits")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                Button(systemName: "plus") {
+                Button{
                     showingAdd = true
+                } label: {
+                    Image(systemName: "plus")
                 }
             }
-            .sheet(isPresented: $showingAdd){
-                AddHabitView { name in
+            
+        }
+        .sheet(isPresented: $showingAdd){
+            AddHabitView { name in
+                if !name.isEmpty {
                     vm.addHabit(named: name)
-                    showingAdd = false
                 }
+                showingAdd = false
             }
         }
         
     }
+    
+}
 
