@@ -50,7 +50,4 @@ final class HabitViewModel: ObservableObject {
             }
         }
     }
-    ﻿
-
-
-}
+    

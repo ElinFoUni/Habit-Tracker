@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Habit Tracker
-//
-//  Created by Elin Flyg on 2025-04-29.
-//
-
 import SwiftUI
 import CoreData
 
