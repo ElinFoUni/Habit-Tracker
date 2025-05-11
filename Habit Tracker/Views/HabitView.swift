@@ -7,7 +7,7 @@ struct HabitView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(habit.name)
+                Text(habit.name ?? "Untitled")
                 Text("🔥 \(habit.currentStreak) day streak")
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -22,8 +22,4 @@ struct HabitView: View {
             .cornerRadius(15)
         }
     }
-}
-
-#Preview {
-    HabitView()
 }

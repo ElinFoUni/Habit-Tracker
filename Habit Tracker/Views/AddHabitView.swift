@@ -3,28 +3,24 @@ import SwiftUI
 struct AddHabitView: View {
     @State private var name = ""
     var done: (String) -> Void
-    
+
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Habit title:", text: $name)
+                TextField("Habit name", text: $name)
             }
-            .navigationTitle("Add New Habit")
+            .navigationTitle("New Habit")
             .toolbar {
-                ToolbarItem(placement: confirmationAction) {
-                    Button("Save") {
-                        done(name.trimmingCharacters(in: whitespacesAndNewlines))
-                    }
-                    .disabkle(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { done("") }
                 }
-                ToolbarItem(placement: cancellationAction) {
-                    Button("Cancel") { done("")}
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        done(name.trimmingCharacters(in: .whitespacesAndNewlines))
+                    }
+                    .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
         }
     }
-}
-
-#Preview {
-    AddHabitView(done: <#(String) -> Void#>)
 }

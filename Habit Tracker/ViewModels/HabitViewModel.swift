@@ -28,7 +28,7 @@ final class HabitViewModel: ObservableObject {
         func toggleDone(for habit: Habit) {
             let today = Date()
             if let last = habit.lastDone, last.isSameDay(as: today) {
-                // already checked today → uncheck
+                // if already checked today it will uncheck
                 habit.lastDone = nil
                 habit.currentStreak -= 1
             } else {
@@ -42,7 +42,8 @@ final class HabitViewModel: ObservableObject {
             }
             save()
         }
-
+        
+        // saves to coredata then fetches the data
         private func save() {
             if context.hasChanges {
                 try? context.save()
