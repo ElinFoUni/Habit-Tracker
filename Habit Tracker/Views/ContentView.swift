@@ -15,29 +15,28 @@ struct ContentView: View {
                     
                 }
             }
-        }
-        
-        .navigationTitle("Habits")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button{
-                    showingAdd = true
-                } label: {
-                    Image(systemName: "plus")
+            
+            .navigationTitle("Habits")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button{
+                        showingAdd = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+                
+            }
+            .sheet(isPresented: $showingAdd){
+                AddHabitView { name in
+                    if !name.isEmpty {
+                        vm.addHabit(named: name)
+                    }
+                    showingAdd = false
                 }
             }
             
         }
-        .sheet(isPresented: $showingAdd){
-            AddHabitView { name in
-                if !name.isEmpty {
-                    vm.addHabit(named: name)
-                }
-                showingAdd = false
-            }
-        }
         
     }
-    
 }
-
